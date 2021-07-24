@@ -1,5 +1,5 @@
 import re
-
+import PySimpleGUI as sg
 
 # A function to get all relevant data out of the focus file
 def extract_data(filepath):
@@ -21,7 +21,7 @@ def extract_data(filepath):
     return icon_list
 
 
-def generate_shine_entries(icon_list):
+def generate_shine_entries(icon_list, switch):
     # Template for a correct shine entry (taken from: https://hoi4.paradoxwikis.com/National_Focus_modding#Focus_icons)
     shine_template = """
     SpriteType = {
@@ -66,12 +66,44 @@ def generate_shine_entries(icon_list):
     # Open a new file (output file) and write the replaced shine_template into it
     with open('generated_shine.txt', 'w') as shine:
         for icon in icon_list:
-            modifiable_thingy = shine_template
-            modifiable_thingy = modifiable_thingy.replace('<sprite name>', icon)
-            modifiable_thingy = modifiable_thingy.replace('<filename>', icon + '.dds')
-            shine.write(modifiable_thingy)
+            if switch:
+                expected_filename = icon
+            else:
+                expected_filename = icon.replace('GFX_', '')
+            shine_object = shine_template
+            shine_object = shine_object.replace('<sprite name>', icon)
+            shine_object = shine_object.replace('<filename>', expected_filename + '.dds')
+            shine.write(shine_object)
 
 
 # Run this
 if __name__ == '__main__':
-    generate_shine_entries(extract_data('files/ITA_focus.txt'))
+
+    # Set theme
+    sg.theme('Dark')
+
+    # PySimpleGUI Layout
+    layout = [[sg.Text(('You must have the line \"icon = GFX_TAG_example_focus\" in the focus definition file!'))],
+              [sg.Text('Select the file that contains your focus tree:')],
+              [sg.Input(), sg.FileBrowse(key="-IN-"), sg.Checkbox('GFX_filename', key='-SWITCH-')],
+              [sg.Button('Add Shines'), sg.Button('Close')]]
+
+    # Building Window
+    window = sg.Window('My File Browser', layout)
+
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED or event == 'Close':
+            break
+        elif event == "Add Shines":
+            try:
+                generate_shine_entries(extract_data(values['-IN-']), values['-SWITCH-'])
+                num = len(extract_data(values['-IN-']))
+                if num == 0:
+                    sg.popup_error('Couldn\'t generate any entries!\nMake sure you have your focus tree file with icon definitions selected!', title='Error', text_color='Red')
+                else:
+                    sg.popup_auto_close('Added ' + str(num) + ' shine entries to the output file')
+
+            except FileNotFoundError:
+                sg.popup_error('No file found')
+
