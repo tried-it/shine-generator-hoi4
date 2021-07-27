@@ -4,27 +4,22 @@ HoI4 shine generator is a Python script to automate the creation of shines in He
 
 ## Installation and Usage
 
-**1.** Download you prefered version of the tool. Both releases can be found in the release tab of this Github page.
+**1.** Download you prefered version of the tool. The `shine_adder_gui.py` provides a graphical interface, while the `cli.py` can be used in the command line.
 
 **2.** Make sure to have Python installed on your machine. Download it [here](https://www.python.org/downloads/).
 
-### For the CLI release:
+### For the CLI file:
 - Open CMD by pressing <kbd>Windows</kbd> + <kbd>R</kbd>
 - Navigate to the download location of the `cli.py` file
-- Run this command with the path to your own file
-```bash
-python cli.py filepath(e.g. \mod\common\national_focus\TAG_focus.txt)
-```
+- Run `python cli.py --help` for more information on how to use the tool.
 
-- Run `python cli.py -help` for more information
-
-### For the GUI release:
+### For the GUI file:
 - Open CMD by pressing <kbd>Windows</kbd> + <kbd>R</kbd>
 - Run this command
 ```
 pip install PySimpleGUI
 ```
-- Now just start the `shine_adder_gui.py` via double-clicking
+- Now just run `shine_adder_gui.py` via double-clicking
 
 
 ## License
