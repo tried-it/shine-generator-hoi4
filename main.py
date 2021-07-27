@@ -1,6 +1,7 @@
 import re
 import PySimpleGUI as sg
 
+
 # A function to get all relevant data out of the focus file
 def extract_data(filepath):
     # Create list to store relevant lines in and dictionary to replace unnecessary stuff
@@ -27,8 +28,8 @@ def generate_shine_entries(icon_list, switch):
     SpriteType = {
         name = "<sprite name>"
         texturefile = "gfx/interface/goals/<filename>"
-	}
-	
+    }
+
     SpriteType = {
         name = "<sprite name>_shine"
         texturefile = "gfx/interface/goals/<filename>"
@@ -76,20 +77,18 @@ def generate_shine_entries(icon_list, switch):
             shine.write(shine_object)
 
 
-# Run this
-if __name__ == '__main__':
-
+def main():
     # Set theme
     sg.theme('Dark')
 
     # PySimpleGUI Layout
-    layout = [[sg.Text(('You must have the line \"icon = GFX_TAG_example_focus\" in the focus definition file!'))],
+    layout = [[sg.Text('You must have the line \"icon = GFX_TAG_your_focus_name\" in each focus definition!')],
               [sg.Text('Select the file that contains your focus tree:')],
               [sg.Input(), sg.FileBrowse(key="-IN-"), sg.Checkbox('GFX_filename', key='-SWITCH-')],
               [sg.Button('Add Shines'), sg.Button('Close')]]
 
     # Building Window
-    window = sg.Window('My File Browser', layout)
+    window = sg.Window('Generate shine entries', layout)
 
     while True:
         event, values = window.read()
@@ -100,10 +99,15 @@ if __name__ == '__main__':
                 generate_shine_entries(extract_data(values['-IN-']), values['-SWITCH-'])
                 num = len(extract_data(values['-IN-']))
                 if num == 0:
-                    sg.popup_error('Couldn\'t generate any entries!\nMake sure you have your focus tree file with icon definitions selected!', title='Error', text_color='Red')
+                    sg.popup_error('Couldn\'t generate any entries!\nMake sure you have your focus tree file with '
+                                   'icon definitions selected!', title='Error', text_color='Red')
                 else:
                     sg.popup_auto_close('Added ' + str(num) + ' shine entries to the output file')
 
             except FileNotFoundError:
                 sg.popup_error('No file found')
 
+
+# Run this
+if __name__ == '__main__':
+    main()
