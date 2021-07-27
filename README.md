@@ -2,6 +2,19 @@
 
 HoI4 shine generator is a Python script to automate the creation of shines in Hearts of Iron IV modding.
 
+## Important
+```lua
+focus = {
+	id = TAG_focus_id
+	icon = GFX_TAG_focus_id
+	cost = 10
+	x = 4
+	y = 20
+	relative_position_id = TAG_previous_focus
+}
+```
+**The tool utilizes the second line of the focus file to generate the shines! Without `icon = GFX_TAG_example` it will NOT work.**
+
 ## Installation and Usage
 
 **1.** Download you prefered version of the tool. The `shine_adder_gui.py` provides a graphical interface, while the `cli.py` can be used in the command line.
