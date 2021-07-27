@@ -2,6 +2,7 @@ import re
 import argparse
 
 
+
 # A function to get all relevant data out of the focus file
 def extract_data(filepath):
     # Create list to store relevant lines in and dictionary to replace unnecessary stuff
@@ -84,8 +85,12 @@ def main():
     parser.add_argument('--file_name_catch', action='store_true', help='adds \"GFX_\"d in front of the filenames')
 
     args = parser.parse_args()
-    generate_shine_entries(extract_data(args.filepath[0]), args.file_name_catch)
+    try:
+        generate_shine_entries(extract_data(args.filepath[0]), args.file_name_catch)
+        print('Successfully added ' + str(len(extract_data(args.filepath[0]))) + ' shine entries to the output file.')
 
+    except:
+        print('Oops! An error occurred, make sure to use a valid filepath')
 
 # Run this
 if __name__ == '__main__':
