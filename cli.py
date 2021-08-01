@@ -15,7 +15,7 @@
 ###########################################################################
 
 import re
-
+import argparse
 
 # A function to get all relevant data out of the focus file
 def extract_data(filepath):
