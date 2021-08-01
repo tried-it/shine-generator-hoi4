@@ -14,6 +14,7 @@
 # limitations under the License.
 ###########################################################################
 import re
+import PySimpleGUI as sg
 
 # A function to get all relevant data out of the focus file
 def extract_data(filepath):
