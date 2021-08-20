@@ -21,7 +21,7 @@ import argparse
 def extract_data(filepath):
     # Create list to store relevant lines in and dictionary to replace unnecessary stuff
     icon_list = []
-    to_replace = {'\n': '', ' ': '', 'icon=': ''}
+    to_replace = {'\n': '', ' ': '','\t': '', 'icon=': ''}
 
     # Read in focus file
     with open(filepath, 'r') as focus:
