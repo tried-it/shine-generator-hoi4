@@ -17,22 +17,14 @@ focus = {
 
 ## Installation and Usage
 
-**1.** Download you prefered version of the tool. The `shine_adder_gui.py` provides a graphical interface, while the `cli.py` can be used in the command line.
+**1.** Download the "cli.py" in the releases tab.
 
 **2.** Make sure to have Python installed on your machine. Download it [here](https://www.python.org/downloads/).
 
-### For the CLI file:
+### Usage on Windows:
 - Open CMD by pressing <kbd>Windows</kbd> + <kbd>R</kbd>
 - Navigate to the download location of the `cli.py` file
 - Run `python cli.py --help` for more information on how to use the tool.
-
-### For the GUI file:
-- Open CMD by pressing <kbd>Windows</kbd> + <kbd>R</kbd>
-- Run this command
-```
-pip install PySimpleGUI
-```
-- Now just run `shine_adder_gui.py` via double-clicking
 
 
 ## License
